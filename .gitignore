@@ -1,3 +1,6 @@
+# Site
+config.env
+
 # Logs
 logs
 *.log

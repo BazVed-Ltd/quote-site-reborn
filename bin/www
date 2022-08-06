@@ -4,7 +4,10 @@
  * Module dependencies.
  */
 
+require('dotenv').config({ path: 'config.env' });
+
 var app = require('../app');
+var database = require('../database/conn');
 var debug = require('debug')('quote-site-reborn:server');
 var http = require('http');
 
@@ -25,9 +28,15 @@ var server = http.createServer(app);
  * Listen on provided port, on all network interfaces.
  */
 
-server.listen(port);
-server.on('error', onError);
-server.on('listening', onListening);
+database.connectToServer((err) => {
+  if (err) {
+    console.error(err);
+    process.exit(1);
+  }
+  server.listen(port);
+  server.on('error', onError);
+  server.on('listening', onListening);
+});
 
 /**
  * Normalize a port into a number, string, or false.
