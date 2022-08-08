@@ -1,8 +1,10 @@
 FROM node:16 as base
 WORKDIR /usr/src/app
 
-COPY package*.json ./
-COPY bin database routes app.js ./
+COPY package*.json app.js ./
+COPY bin ./bin
+COPY database ./database
+COPY routes ./routes
 
 
 from base as development
