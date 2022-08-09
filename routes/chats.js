@@ -24,8 +24,6 @@ router.get('/:chatId', async function (req, res) {
 
   const chat = await db.collection('chats').findOne({id: +chatId})
 
-  console.log(chat)
-
   const quotes = await db.collection('quotes')
     .find({ peer_id: +chatId })
     .sort({ id: -1 })
@@ -42,13 +40,9 @@ router.get('/:chatId', async function (req, res) {
 
   quotes.forEach(quote => getUniqueUserIds(quote))
 
-  console.log(userIds)
-
   const users = await db.collection('cache')
     .find({ id: { $in: Array.from(userIds) } })
     .toArray()
-
-  console.log(users)
 
   res.json({ chat, quotes, users })
 })
