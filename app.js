@@ -4,7 +4,7 @@ const cookieParser = require('cookie-parser')
 const logger = require('morgan')
 
 const indexRouter = require('./routes/index')
-const quotesRouter = require('./routes/quotes')
+const chatsRouter = require('./routes/chats')
 
 const app = express()
 
@@ -15,6 +15,6 @@ app.use(cookieParser())
 app.use(express.static(path.join(__dirname, 'public')))
 
 app.use('/', indexRouter)
-app.use('/api/quotes', quotesRouter)
+app.use('/api/chats', chatsRouter)
 
 module.exports = app
