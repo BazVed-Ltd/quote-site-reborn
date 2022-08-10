@@ -1,22 +1,7 @@
-FROM node:16-alpine as base
+FROM node:16-alpine
 WORKDIR /usr/src/app
 
 COPY package*.json ./
-
-
-from base as development
-
-RUN npm install
-
-COPY . ./
-
-ENV DEBUG=quote-site-reborn:*
-ENV NODE_ENV=development
-
-CMD ["npm", "run", "dev"]
-
-
-from base as production
 
 COPY app.js ./
 
